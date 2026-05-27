@@ -1,0 +1,18 @@
+# Auto-detect text files and normalize line endings to LF in the repo
+* text=auto eol=lf
+
+# Windows scripts — keep CRLF on checkout for Windows users
+*.ps1 text eol=crlf
+*.psm1 text eol=crlf
+*.bat  text eol=crlf
+*.cmd  text eol=crlf
+
+# Shell scripts — always LF
+*.sh   text eol=lf
+
+# Binary files — no conversion
+*.csv  binary
+*.png  binary
+*.jpg  binary
+*.ico  binary
+*.pbix binary

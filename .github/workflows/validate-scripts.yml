@@ -1,0 +1,75 @@
+name: Validate Scripts
+
+on:
+  push:
+    branches: ["main", "develop"]
+    paths:
+      - "scripts/**"
+      - ".github/workflows/validate-scripts.yml"
+  pull_request:
+    branches: ["main"]
+    paths:
+      - "scripts/**"
+
+jobs:
+  powershell-lint:
+    name: PowerShell — PSScriptAnalyzer
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install PSScriptAnalyzer
+        shell: pwsh
+        run: Install-Module PSScriptAnalyzer -Force -Scope CurrentUser
+
+      - name: Analyze PowerShell scripts
+        shell: pwsh
+        run: |
+          $results = Get-ChildItem -Path scripts -Recurse -Filter "*.ps1" |
+            ForEach-Object {
+              Invoke-ScriptAnalyzer -Path $_.FullName -Severity Error,Warning
+            }
+
+          if ($results) {
+            $results | Format-Table -AutoSize
+            Write-Error "PSScriptAnalyzer encontrou $($results.Count) problema(s)."
+            exit 1
+          } else {
+            Write-Host "Todos os scripts PS1 passaram na análise." -ForegroundColor Green
+          }
+
+  bash-lint:
+    name: Bash — ShellCheck
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run ShellCheck
+        uses: ludeeus/action-shellcheck@master
+        with:
+          scandir: "./scripts"
+          severity: warning
+          check_together: "yes"
+
+  sample-data-check:
+    name: Verify sample data integrity
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check required CSV columns
+        run: |
+          SAMPLE="dashboard/sample-data/costs-sample.csv"
+          REQUIRED="ResourceId ResourceGroupName CostInBillingCurrency BillingCurrencyCode UsageDate"
+          HEADER=$(head -1 "$SAMPLE")
+          MISSING=""
+          for col in $REQUIRED; do
+            if ! echo "$HEADER" | grep -q "$col"; then
+              MISSING="$MISSING $col"
+            fi
+          done
+          if [ -n "$MISSING" ]; then
+            echo "ERRO: Colunas ausentes no sample data:$MISSING"
+            exit 1
+          fi
+          echo "Sample data OK — todas as colunas obrigatórias presentes."

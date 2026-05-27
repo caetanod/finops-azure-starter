@@ -1,0 +1,9 @@
+dashboard/data/*
+!dashboard/data/.gitkeep
+.env
+*.secret
+*.tmp
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
