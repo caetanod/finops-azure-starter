@@ -18,7 +18,6 @@ finops-azure-starter-kit/
 ├── docs/
 │   ├── architecture.md         # Diagrama e decisões de arquitetura
 │   ├── faq.md                  # Perguntas frequentes
-│   ├── powerbi.md              # Guia de criação do dashboard: paleta, páginas, DAX
 │   ├── prerequisites.md        # Pré-requisitos: az CLI, permissões RBAC, Power BI
 │   ├── setup-guide.md          # Passo a passo de instalação e primeira execução
 │   └── troubleshooting.md      # Erros comuns e soluções

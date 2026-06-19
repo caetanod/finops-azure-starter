@@ -92,10 +92,15 @@ finops-azure-starter-kit/
 | [docs/architecture.md](docs/architecture.md) | Diagrama do fluxo e decisões técnicas do MVP |
 | [docs/troubleshooting.md](docs/troubleshooting.md) | Erros comuns (permissões, CSV vazio, formato inesperado) e soluções |
 | [docs/faq.md](docs/faq.md) | Perguntas frequentes |
-| [docs/powerbi.md](docs/powerbi.md) | Guia de criação do dashboard Power BI com paleta de cores e medidas DAX |
 | [CONTRIBUTING.md](CONTRIBUTING.md) | Como contribuir com o projeto |
 | [SECURITY.md](SECURITY.md) | Política de segurança e como reportar vulnerabilidades |
 | [CHANGELOG.md](CHANGELOG.md) | Histórico de versões |
+
+## Dashboard Power BI
+
+Os scripts geram CSVs prontos para conectar ao Power BI Desktop.
+
+O template de dashboard (`.pbix`) com identidade visual, medidas DAX e páginas pré-configuradas está disponível como kit separado — [entre em contato](mailto:diego.caetano@nstech.com.br) para saber mais.
 
 ## Status
 
@@ -103,7 +108,7 @@ finops-azure-starter-kit/
 - [x] Sample data (301 linhas)
 - [x] Scripts base (PowerShell + Bash)
 - [x] Documentação inicial
-- [ ] Dashboard Power BI (`.pbix`)
+- [ ] Dashboard Power BI (`.pbix`) — kit separado
 - [ ] Screenshots do dashboard
 - [ ] Teste de instalação em máquina limpa
 
