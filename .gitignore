@@ -7,3 +7,4 @@ dashboard/data/*
 .idea/
 .DS_Store
 Thumbs.db
+docs/powerbi.md
